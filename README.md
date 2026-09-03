@@ -135,6 +135,18 @@ enable = true
 naa_host = "192.168.30.109"      # NAA endpoint IP for the redirect rule
 ```
 
+## Troubleshooting
+
+If the NAA endpoint shows nothing even though the proxy is running and
+metadata is being injected: the endpoint's `networkaudiod` also has to have
+`NETWORKAUDIOD_METADATA`, `NETWORKAUDIOD_POSITION`, and
+`NETWORKAUDIOD_PICTURE` enabled (they ship commented out in
+`/etc/default/networkaudiod`). With them off, HQPlayer's own start
+negotiation never asks for those sections, so a proxy putting them on the
+wire won't make them appear on the endpoint. See
+[PROTOCOL-NOTES.md](PROTOCOL-NOTES.md) for what we verified on
+hardware.
+
 ## License
 
 See [LICENSE](LICENSE).
